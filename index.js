@@ -64,10 +64,22 @@ function parseNumber(value, fallback) {
 	return Number.isFinite(num) ? num : fallback;
 }
 
+// Parse optional numeric controls where the xyOps default value 0 means "unset".
+function parseOptionalNumber(value) {
+	const num = parseNumber(value, undefined);
+	return Number.isFinite(num) && num !== 0 ? num : undefined;
+}
+
 // Convert a possibly blank parameter into a rounded integer.
 function parseInteger(value, fallback) {
 	const num = parseNumber(value, fallback);
 	return Number.isFinite(num) ? Math.round(num) : fallback;
+}
+
+// Parse optional integer controls where the xyOps default value 0 means "unset".
+function parseOptionalInteger(value) {
+	const num = parseOptionalNumber(value);
+	return Number.isFinite(num) ? Math.round(num) : undefined;
 }
 
 // Convert xyOps checkbox-ish values into booleans.
@@ -388,16 +400,16 @@ async function writeAudioFile(result, prefix, outputFormat, index = 0) {
 function buildVoiceSettings(params) {
 	const settings = cloneJsonObject(params.voice_settings, "Voice Settings");
 
-	const stability = parseNumber(params.stability, undefined);
+	const stability = parseOptionalNumber(params.stability);
 	if (Number.isFinite(stability)) settings.stability = stability;
 
-	const similarityBoost = parseNumber(params.similarity_boost, undefined);
+	const similarityBoost = parseOptionalNumber(params.similarity_boost);
 	if (Number.isFinite(similarityBoost)) settings.similarity_boost = similarityBoost;
 
-	const style = parseNumber(params.style, undefined);
+	const style = parseOptionalNumber(params.style);
 	if (Number.isFinite(style)) settings.style = style;
 
-	const speed = parseNumber(params.speed, undefined);
+	const speed = parseOptionalNumber(params.speed);
 	if (Number.isFinite(speed)) settings.speed = speed;
 
 	if (params.use_speaker_boost !== undefined && params.use_speaker_boost !== "") {
@@ -423,7 +435,7 @@ async function toolTextToSpeech(job, params, apiKey) {
 
 	const outputFormat = String(params.output_format || DEFAULT_OUTPUT_FORMAT).trim();
 	const timeoutMs = parseInteger(params.timeout_ms, DEFAULT_TIMEOUT_MS);
-	const seed = parseInteger(params.seed, undefined);
+	const seed = parseOptionalInteger(params.seed);
 	const voiceSettings = buildVoiceSettings(params);
 
 	const body = buildCommonJsonBody(params, {
@@ -480,8 +492,8 @@ async function toolSoundEffects(job, params, apiKey) {
 		const body = buildCommonJsonBody(params, {
 			text,
 			model_id: String(params.model_id || "eleven_text_to_sound_v2").trim(),
-			duration_seconds: parseNumber(params.duration_seconds, undefined),
-			prompt_influence: parseNumber(params.prompt_influence, undefined),
+			duration_seconds: parseOptionalNumber(params.duration_seconds),
+			prompt_influence: parseOptionalNumber(params.prompt_influence),
 			loop: parseBoolean(params.loop, false)
 		});
 
@@ -543,7 +555,7 @@ async function toolVoiceChanger(job, params, apiKey) {
 
 	const outputFormat = String(params.output_format || DEFAULT_OUTPUT_FORMAT).trim();
 	const timeoutMs = parseInteger(params.timeout_ms, DEFAULT_TIMEOUT_MS);
-	const seed = parseInteger(params.seed, undefined);
+	const seed = parseOptionalInteger(params.seed);
 	const form = new FormData();
 	await appendFormFile(form, "audio", inputFile);
 	appendFormValue(form, "model_id", params.model_id || "eleven_multilingual_sts_v2");
@@ -587,7 +599,7 @@ async function toolMusic(job, params, apiKey) {
 
 	const outputFormat = String(params.output_format || DEFAULT_OUTPUT_FORMAT).trim();
 	const timeoutMs = parseInteger(params.timeout_ms, 600000);
-	const seed = parseInteger(params.seed, undefined);
+	const seed = parseOptionalInteger(params.seed);
 	const body = buildCommonJsonBody(params, {
 		prompt: prompt || undefined,
 		composition_plan: Object.keys(compositionPlan).length ? compositionPlan : undefined,
@@ -622,8 +634,8 @@ async function toolMusic(job, params, apiKey) {
 async function toolSpeechToText(job, params, apiKey) {
 	const inputFile = resolveInputFile(job, params);
 	const timeoutMs = parseInteger(params.timeout_ms, DEFAULT_TIMEOUT_MS);
-	const seed = parseInteger(params.seed, undefined);
-	const numSpeakers = parseInteger(params.num_speakers, undefined);
+	const seed = parseOptionalInteger(params.seed);
+	const numSpeakers = parseOptionalInteger(params.num_speakers);
 	const keyterms = parseList(params.keyterms);
 	const form = new FormData();
 

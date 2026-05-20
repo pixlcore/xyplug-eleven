@@ -10,7 +10,7 @@
 				"title": "ElevenLabs Audio",
 				"enabled": true,
 				"type": "event",
-				"command": "npx -y @pixlcore/xyplug-eleven@1.0.0",
+				"command": "npx -y @pixlcore/xyplug-eleven@1.0.1",
 				"script": "",
 				"kill": "parent",
 				"notes": "Generate speech, sound effects, music, voice conversions, isolated vocals, and speech transcripts using the ElevenLabs API.",
@@ -71,7 +71,7 @@
 											"type": "text",
 											"caption": "Optional voice stability value from 0 to 1.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
@@ -81,7 +81,7 @@
 											"type": "text",
 											"caption": "Optional voice similarity boost from 0 to 1.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
@@ -91,7 +91,7 @@
 											"type": "text",
 											"caption": "Optional style exaggeration value from 0 to 1.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
@@ -101,7 +101,7 @@
 											"type": "text",
 											"caption": "Optional speaking speed multiplier.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
@@ -128,7 +128,7 @@
 											"type": "text",
 											"caption": "Optional seed for more consistent generation.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
@@ -183,7 +183,7 @@
 											"type": "text",
 											"caption": "Optional generated audio duration in seconds.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
@@ -193,7 +193,7 @@
 											"type": "text",
 											"caption": "Optional prompt influence value from 0 to 1.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
@@ -491,7 +491,7 @@
 											"type": "text",
 											"caption": "Optional expected speaker count.",
 											"locked": false,
-											"value": "",
+											"value": 0,
 											"variant": "number",
 											"required": false
 										},
