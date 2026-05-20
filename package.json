@@ -1,0 +1,41 @@
+{
+	"name": "@pixlcore/xyplug-eleven",
+	"version": "1.0.0",
+	"description": "ElevenLabs audio generation and transcription plugin for the xyOps workflow automation system.",
+	"author": "Joseph Huckaby <jhuckaby@pixlcore.com>",
+	"homepage": "https://github.com/pixlcore/xyplug-eleven",
+	"license": "MIT",
+	"type": "module",
+	"bin": {
+		"xyplug-eleven": "index.js"
+	},
+	"files": [
+		"index.js",
+		"README.md",
+		"LICENSE.md",
+		"xyops.json"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pixlcore/xyplug-eleven"
+	},
+	"bugs": {
+		"url": "https://github.com/pixlcore/xyplug-eleven/issues"
+	},
+	"keywords": [
+		"xyops",
+		"elevenlabs",
+		"tts",
+		"speech-to-text",
+		"audio",
+		"music",
+		"sound-effects"
+	],
+	"engines": {
+		"node": ">=18.17.0"
+	},
+	"dependencies": {},
+	"publishConfig": {
+		"access": "public"
+	}
+}

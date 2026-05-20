@@ -1,0 +1,543 @@
+{
+	"type": "xypdf",
+	"description": "xyOps Portable Data Object",
+	"version": "1.0",
+	"items": [
+		{
+			"type": "plugin",
+			"data": {
+				"id": "pm11labspljew7vx0",
+				"title": "ElevenLabs Audio",
+				"enabled": true,
+				"type": "event",
+				"command": "npx -y @pixlcore/xyplug-eleven@1.0.0",
+				"script": "",
+				"kill": "parent",
+				"notes": "Generate speech, sound effects, music, voice conversions, isolated vocals, and speech transcripts using the ElevenLabs API.",
+				"icon": "pause-circle-outline",
+				"params": [
+					{
+						"id": "tool",
+						"title": "Tool Select",
+						"type": "toolset",
+						"caption": "",
+						"data": {
+							"tools": [
+								{
+									"id": "text_to_speech",
+									"title": "Text to Speech",
+									"description": "Generate spoken audio from text and attach the output file to the job.",
+									"fields": [
+										{
+											"id": "text",
+											"title": "Text",
+											"type": "textarea",
+											"caption": "Enter the text to synthesize.",
+											"locked": false,
+											"value": "",
+											"required": true
+										},
+										{
+											"id": "voice_id",
+											"title": "Voice ID",
+											"type": "text",
+											"caption": "ElevenLabs voice ID to use for speech generation. See [Default Voices](https://elevenlabs.io/app/default-voices), click the ellipsis menu, then click \"Copy Voice ID\".",
+											"locked": false,
+											"value": "JBFqnCBsd6RMkjVDRZzb",
+											"variant": "text",
+											"required": true
+										},
+										{
+											"id": "model_id",
+											"title": "Model ID",
+											"type": "text",
+											"caption": "ElevenLabs TTS model ID. [Model List](https://elevenlabs.io/docs/overview/models#models-overview).",
+											"locked": false,
+											"value": "eleven_multilingual_v2",
+											"variant": "text",
+											"required": true
+										},
+										{
+											"id": "output_format",
+											"title": "Output Format",
+											"type": "select",
+											"caption": "Audio format requested from ElevenLabs. Some sample rates and bit rates require higher tier accounts (Pro or Creator).",
+											"locked": false,
+											"value": "mp3_44100_128, mp3_44100_192, mp3_22050_32, pcm_16000, pcm_24000, pcm_44100, ulaw_8000"
+										},
+										{
+											"id": "stability",
+											"title": "Stability",
+											"type": "text",
+											"caption": "Optional voice stability value from 0 to 1.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "similarity_boost",
+											"title": "Similarity Boost",
+											"type": "text",
+											"caption": "Optional voice similarity boost from 0 to 1.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "style",
+											"title": "Style",
+											"type": "text",
+											"caption": "Optional style exaggeration value from 0 to 1.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "speed",
+											"title": "Speed",
+											"type": "text",
+											"caption": "Optional speaking speed multiplier.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "use_speaker_boost",
+											"title": "Speaker Boost",
+											"type": "checkbox",
+											"caption": "Enable ElevenLabs speaker boost in voice settings.",
+											"locked": false,
+											"value": true
+										},
+										{
+											"id": "language_code",
+											"title": "Language Code",
+											"type": "text",
+											"caption": "Optional ISO language code.",
+											"locked": false,
+											"value": "",
+											"required": false
+										},
+										{
+											"id": "seed",
+											"title": "Seed",
+											"type": "text",
+											"caption": "Optional seed for more consistent generation.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "args",
+											"title": "Custom JSON",
+											"type": "json",
+											"caption": "Optional JSON object merged into the ElevenLabs request body.",
+											"locked": false,
+											"value": {},
+											"required": false
+										},
+										{
+											"id": "timeout_ms",
+											"title": "Timeout (ms)",
+											"type": "text",
+											"caption": "Number of milliseconds to wait for the request.",
+											"locked": false,
+											"value": 240000,
+											"variant": "number",
+											"required": false
+										}
+									]
+								},
+								{
+									"id": "sound_effects",
+									"title": "Sound Effects",
+									"description": "Generate one or more sound effects from a text prompt.",
+									"fields": [
+										{
+											"id": "prompt",
+											"title": "Prompt",
+											"type": "textarea",
+											"caption": "Describe the sound effect to generate.",
+											"locked": false,
+											"value": "A cinematic whoosh with sparkling magic dust.",
+											"required": true
+										},
+										{
+											"id": "model_id",
+											"title": "Model ID",
+											"type": "text",
+											"caption": "ElevenLabs sound effects model ID. [Model List](https://elevenlabs.io/docs/overview/models#models-overview).",
+											"locked": false,
+											"value": "eleven_text_to_sound_v2",
+											"variant": "text",
+											"required": true
+										},
+										{
+											"id": "duration_seconds",
+											"title": "Duration Seconds",
+											"type": "text",
+											"caption": "Optional generated audio duration in seconds.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "prompt_influence",
+											"title": "Prompt Influence",
+											"type": "text",
+											"caption": "Optional prompt influence value from 0 to 1.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "loop",
+											"title": "Loop",
+											"type": "checkbox",
+											"caption": "Ask ElevenLabs for a loopable result when supported.",
+											"locked": false,
+											"value": false
+										},
+										{
+											"id": "count",
+											"title": "Count",
+											"type": "text",
+											"caption": "How many sound effects to generate.",
+											"locked": false,
+											"value": 1,
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "output_format",
+											"title": "Output Format",
+											"type": "select",
+											"caption": "Audio format requested from ElevenLabs. Some sample rates and bit rates require higher tier accounts (Pro or Creator).",
+											"locked": false,
+											"value": "mp3_44100_128, mp3_44100_192, mp3_22050_32, pcm_16000, pcm_24000, pcm_44100, ulaw_8000"
+										},
+										{
+											"id": "args",
+											"title": "Custom JSON",
+											"type": "json",
+											"caption": "Optional JSON object merged into the ElevenLabs request body.",
+											"locked": false,
+											"value": {},
+											"required": false
+										},
+										{
+											"id": "timeout_ms",
+											"title": "Timeout (ms)",
+											"type": "text",
+											"caption": "Number of milliseconds to wait for each request.",
+											"locked": false,
+											"value": 240000,
+											"variant": "number",
+											"required": false
+										}
+									]
+								},
+								{
+									"id": "voice_isolator",
+									"title": "Voice Isolator",
+									"description": "Remove background noise from an input audio file and attach the cleaned output.",
+									"fields": [
+										{
+											"id": "input_file",
+											"title": "Input File",
+											"type": "text",
+											"caption": "Optional input file glob. Leave blank to use the first job input file.",
+											"locked": false,
+											"value": "",
+											"required": false
+										},
+										{
+											"id": "file_format",
+											"title": "File Format",
+											"type": "select",
+											"caption": "Input file format hint for ElevenLabs.",
+											"locked": false,
+											"value": "mp3, wav, other, pcm_s16le_16, pcm_s16le_24, pcm_s16le_44_1, pcm_s16le_48, ulaw_8"
+										},
+										{
+											"id": "timeout_ms",
+											"title": "Timeout (ms)",
+											"type": "text",
+											"caption": "Number of milliseconds to wait for the request.",
+											"locked": false,
+											"value": 240000,
+											"variant": "number",
+											"required": false
+										}
+									]
+								},
+								{
+									"id": "voice_changer",
+									"title": "Voice Changer",
+									"description": "Convert an input speech file into a selected ElevenLabs voice.",
+									"fields": [
+										{
+											"id": "input_file",
+											"title": "Input File",
+											"type": "text",
+											"caption": "Optional input file glob. Leave blank to use the first job input file.",
+											"locked": false,
+											"value": "",
+											"required": false
+										},
+										{
+											"id": "voice_id",
+											"title": "Voice ID",
+											"type": "text",
+											"caption": "ElevenLabs voice ID to convert the speech into. See [Default Voices](https://elevenlabs.io/app/default-voices), click the ellipsis menu, then click \"Copy Voice ID\".",
+											"locked": false,
+											"value": "JBFqnCBsd6RMkjVDRZzb",
+											"variant": "text",
+											"required": true
+										},
+										{
+											"id": "model_id",
+											"title": "Model ID",
+											"type": "text",
+											"caption": "ElevenLabs speech-to-speech model ID. [Model List](https://elevenlabs.io/docs/overview/models#models-overview).",
+											"locked": false,
+											"value": "eleven_multilingual_sts_v2",
+											"variant": "text",
+											"required": true
+										},
+										{
+											"id": "output_format",
+											"title": "Output Format",
+											"type": "select",
+											"caption": "Audio format requested from ElevenLabs. Some sample rates and bit rates require higher tier accounts (Pro or Creator).",
+											"locked": false,
+											"value": "mp3_44100_128, mp3_44100_192, mp3_22050_32, pcm_16000, pcm_24000, pcm_44100, ulaw_8000"
+										},
+										{
+											"id": "file_format",
+											"title": "File Format",
+											"type": "select",
+											"caption": "Input file format hint for ElevenLabs.",
+											"locked": false,
+											"value": "mp3, wav, other, pcm_s16le_16, pcm_s16le_24, pcm_s16le_44_1, pcm_s16le_48, ulaw_8"
+										},
+										{
+											"id": "remove_background_noise",
+											"title": "Remove Noise",
+											"type": "checkbox",
+											"caption": "Ask ElevenLabs to remove background noise before voice conversion.",
+											"locked": false,
+											"value": false
+										},
+										{
+											"id": "voice_settings",
+											"title": "Voice Settings",
+											"type": "json",
+											"caption": "Optional ElevenLabs voice settings JSON.",
+											"locked": false,
+											"value": {},
+											"required": false
+										},
+										{
+											"id": "timeout_ms",
+											"title": "Timeout (ms)",
+											"type": "text",
+											"caption": "Number of milliseconds to wait for the request.",
+											"locked": false,
+											"value": 240000,
+											"variant": "number",
+											"required": false
+										}
+									]
+								},
+								{
+									"id": "music",
+									"title": "Music",
+									"description": "Generate music from a text prompt and attach the audio file to the job.",
+									"fields": [
+										{
+											"id": "prompt",
+											"title": "Prompt",
+											"type": "textarea",
+											"caption": "Describe the music to generate.",
+											"locked": false,
+											"value": "Upbeat synthwave instrumental with warm analog bass and bright arpeggios.",
+											"required": true
+										},
+										{
+											"id": "model_id",
+											"title": "Model ID",
+											"type": "text",
+											"caption": "ElevenLabs music model ID. [Model List](https://elevenlabs.io/docs/overview/models#models-overview).",
+											"locked": false,
+											"value": "music_v1",
+											"variant": "text",
+											"required": true
+										},
+										{
+											"id": "music_length_ms",
+											"title": "Length (ms)",
+											"type": "text",
+											"caption": "Optional song length in milliseconds.",
+											"locked": false,
+											"value": 30000,
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "force_instrumental",
+											"title": "Instrumental",
+											"type": "checkbox",
+											"caption": "Guarantee an instrumental output when supported.",
+											"locked": false,
+											"value": true
+										},
+										{
+											"id": "output_format",
+											"title": "Output Format",
+											"type": "select",
+											"caption": "Audio format requested from ElevenLabs. Some sample rates and bit rates require higher tier accounts (Pro or Creator).",
+											"locked": false,
+											"value": "mp3_44100_128, mp3_44100_192, mp3_22050_32, pcm_16000, pcm_24000, pcm_44100, ulaw_8000"
+										},
+										{
+											"id": "args",
+											"title": "Custom JSON",
+											"type": "json",
+											"caption": "Optional JSON object merged into the ElevenLabs request body.",
+											"locked": false,
+											"value": {},
+											"required": false
+										},
+										{
+											"id": "timeout_ms",
+											"title": "Timeout (ms)",
+											"type": "text",
+											"caption": "Number of milliseconds to wait for the request.",
+											"locked": false,
+											"value": 600000,
+											"variant": "number",
+											"required": false
+										}
+									]
+								},
+								{
+									"id": "speech_to_text",
+									"title": "Speech to Text",
+									"description": "Transcribe an input audio file and return text plus transcript JSON in job data.",
+									"fields": [
+										{
+											"id": "input_file",
+											"title": "Input File",
+											"type": "text",
+											"caption": "Optional input file glob. Leave blank to use the first job input file.",
+											"locked": false,
+											"value": "",
+											"required": false
+										},
+										{
+											"id": "model_id",
+											"title": "Model ID",
+											"type": "text",
+											"caption": "ElevenLabs speech-to-text model ID. [Model List](https://elevenlabs.io/docs/overview/models#models-overview).",
+											"locked": false,
+											"value": "scribe_v2",
+											"variant": "text",
+											"required": true
+										},
+										{
+											"id": "language_code",
+											"title": "Language Code",
+											"type": "text",
+											"caption": "Optional ISO language code.",
+											"locked": false,
+											"value": "",
+											"required": false
+										},
+										{
+											"id": "tag_audio_events",
+											"title": "Audio Events",
+											"type": "checkbox",
+											"caption": "Tag non-speech audio events in the transcript.",
+											"locked": false,
+											"value": true
+										},
+										{
+											"id": "timestamps_granularity",
+											"title": "Timestamps",
+											"type": "select",
+											"caption": "Timestamp granularity returned by ElevenLabs.",
+											"locked": false,
+											"value": "none, word, character"
+										},
+										{
+											"id": "diarize",
+											"title": "Diarize",
+											"type": "checkbox",
+											"caption": "Attempt to identify different speakers.",
+											"locked": false,
+											"value": false
+										},
+										{
+											"id": "num_speakers",
+											"title": "Speakers",
+											"type": "text",
+											"caption": "Optional expected speaker count.",
+											"locked": false,
+											"value": "",
+											"variant": "number",
+											"required": false
+										},
+										{
+											"id": "keyterms",
+											"title": "Key Terms",
+											"type": "textarea",
+											"caption": "Optional comma-separated or newline-separated terms to help recognition.",
+											"locked": false,
+											"value": "",
+											"required": false
+										},
+										{
+											"id": "file_format",
+											"title": "File Format",
+											"type": "select",
+											"caption": "Input file format hint for ElevenLabs.",
+											"locked": false,
+											"value": "mp3, wav, other, pcm_s16le_16, pcm_s16le_24, pcm_s16le_44_1, pcm_s16le_48, ulaw_8"
+										},
+										{
+											"id": "args",
+											"title": "Custom JSON",
+											"type": "json",
+											"caption": "Optional extra multipart fields for ElevenLabs speech-to-text.",
+											"locked": false,
+											"value": {},
+											"required": false
+										},
+										{
+											"id": "timeout_ms",
+											"title": "Timeout (ms)",
+											"type": "text",
+											"caption": "Number of milliseconds to wait for the request.",
+											"locked": false,
+											"value": 240000,
+											"variant": "number",
+											"required": false
+										}
+									]
+								}
+							]
+						}
+					}
+				]
+			}
+		}
+	]
+}
