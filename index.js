@@ -64,10 +64,9 @@ function parseNumber(value, fallback) {
 	return Number.isFinite(num) ? num : fallback;
 }
 
-// Parse optional numeric controls where the xyOps default value 0 means "unset".
+// Parse optional numeric controls where null means "unset".
 function parseOptionalNumber(value) {
-	const num = parseNumber(value, undefined);
-	return Number.isFinite(num) && num !== 0 ? num : undefined;
+	return parseNumber(value, undefined);
 }
 
 // Convert a possibly blank parameter into a rounded integer.
@@ -76,7 +75,7 @@ function parseInteger(value, fallback) {
 	return Number.isFinite(num) ? Math.round(num) : fallback;
 }
 
-// Parse optional integer controls where the xyOps default value 0 means "unset".
+// Parse optional integer controls where null means "unset".
 function parseOptionalInteger(value) {
 	const num = parseOptionalNumber(value);
 	return Number.isFinite(num) ? Math.round(num) : undefined;
@@ -717,7 +716,6 @@ async function main() {
 		xy: 1,
 		code: 0,
 		progress: 1,
-		perf: { total: elapsed, elevenlabs: elapsed },
 		data: result.data || {},
 		files: result.files || []
 	}, true);
